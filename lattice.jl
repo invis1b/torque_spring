@@ -10,7 +10,7 @@ A=A.+B/2
 println(A)
 println(B)
 theta_array=zeros(100,100)
-vtheta_array=0.01.*rand(100,100)
+vtheta_array=0.01.*rand(100,100).-0.005
 atheta_array=zeros(100,100)
 dt=0.01
 
@@ -18,7 +18,7 @@ writedlm("initial.txt",theta_array)
 writedlm("initial2.txt",vtheta_array)
 
         
-for i in 1:1000
+for i in 1:10000
     for j in 1:100
         for k in 1:100
             atheta_array[j,k]=-0.5*(4*(A[1]^2+A[2]^2+A[3]^2+A[4]^2)*theta_array[j,k]^3)
@@ -71,10 +71,10 @@ for i in 1:1000
     end
     for j in 1:100
         for k in 1:100
-            vtheta_array[j,j]=vtheta_array[j,k]+0.5*(atheta_array_old[j,k]+atheta_array[j,k])*dt
+            vtheta_array[j,k]=vtheta_array[j,k]+0.5*(atheta_array_old[j,k]+atheta_array[j,k])*dt
         end
     end
-    if i%100==0
+    if i%1000==0
         writedlm("step$i.txt",theta_array)
         writedlm("vstep$i.txt",vtheta_array)
     end
